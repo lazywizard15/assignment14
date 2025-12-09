@@ -96,7 +96,9 @@ def setup_test_database(request):
     try:
         Base.metadata.drop_all(bind=test_engine)
         Base.metadata.create_all(bind=test_engine)
-        init_db()
+        #init_db()
+        test_engine.dispose()
+        
         logger.info("Test database initialized.")
     except Exception as e:
         logger.error(f"Error setting up test database: {str(e)}")
