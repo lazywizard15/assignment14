@@ -100,7 +100,7 @@ jobs:
           push: true
           tags: |
             lazywizard15/assignment14:latest
-            kaw393939/assignment14:${{ github.sha }}
+            lazywizard15/assignment14:${{ github.sha }}
           platforms: linux/amd64,linux/arm64
           cache-from: type=registry,ref=lazywizard15/assignment14:cache
           cache-to: type=inline,mode=max
