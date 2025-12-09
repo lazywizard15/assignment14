@@ -251,7 +251,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.detail || 'Registration failed');
+                // Check if the error is a Pydantic validation list (Array)
+                if (Array.isArray(data.detail)) {
+                    // Extract the first validation error message
+                    const firstError = data.detail[0];
+                    throw new Error(firstError.msg || 'Validation error');
+                } 
+                // Check if it's a simple string error (like "Email already taken")
+                else if (typeof data.detail === 'string') {
+                    throw new Error(data.detail);
+                }
+                // Fallback for unknown objects
+                else {
+                    throw new Error(JSON.stringify(data.detail) || 'Registration failed');
+                }
             }
 
             // Show success message

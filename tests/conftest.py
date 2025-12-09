@@ -187,9 +187,6 @@ def fastapi_server():
 
     process = subprocess.Popen(
         ['uvicorn', 'app.main:app', '--host', '127.0.0.1', '--port', str(base_port)],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
         cwd='.'  # ensure the working directory is set correctly
     )
 
